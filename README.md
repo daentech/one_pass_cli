@@ -1,28 +1,31 @@
 # OnePassCli
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/one_pass_cli`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+A Commandline utility to make the one password cli a bit more user friendly for an interactive user rather than an automated system
 
 ## Installation
 
-Add this line to your application's Gemfile:
+You will require the 1password commandline utility installed and should have already signed in at least once to the required 1password server (subdomain)
 
-```ruby
-gem 'one_pass_cli'
-```
+Downloads are available here:
+https://app-updates.agilebits.com/product_history/CLI
 
-And then execute:
+Sign into 1password by running the following:
 
-    $ bundle
+`op signin <subdomain>.1password.com <email_address> <secret_key>`
 
-Or install it yourself as:
+It will ask for your password as well to complete setup
 
-    $ gem install one_pass_cli
+From within this directory run `bundle exec rake install`
 
 ## Usage
 
-TODO: Write usage instructions here
+Once the `op` command has been installed and is available on the PATH, you can run this cli:
+
+`one_pass_cli <subdomain> <search term>`
+
+It will ask for your password each time.
+
+Passing the flag `--show` will show the passwords in plaintext in the terminal. Without this flag passwords will be copied directly to the clipboard
 
 ## Development
 
