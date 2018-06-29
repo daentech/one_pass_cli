@@ -69,19 +69,21 @@ module OnePassCli
       }
   
       # Handle 2FA
-      result['details']['sections'].each { |section| 
-        unless section['fields'].nil?
-          section['fields'].each { |field|
-            if field['v'].start_with?("otpauth://")
-              parsed_uri = CGI::parse(URI::parse(field['v']).query)
-              totp = ROTP::TOTP.new(parsed_uri['secret'][0])
-              print("#{field['t']}: #{totp.now}")
-            else
-              print("#{field['t']}: #{field['v']}\n")
-            end
-          }
-        end
-    }
+      if result['details']['sections'] != nil
+        result['details']['sections'].each { |section| 
+          unless section['fields'].nil?
+            section['fields'].each { |field|
+              if field['v'].start_with?("otpauth://")
+                parsed_uri = CGI::parse(URI::parse(field['v']).query)
+                totp = ROTP::TOTP.new(parsed_uri['secret'][0])
+                print("#{field['t']}: #{totp.now}")
+              else
+                print("#{field['t']}: #{field['v']}\n")
+              end
+            }
+          end
+        }
+      end
     end
   
     def copy_to_clipboard(value)
